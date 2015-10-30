@@ -10,11 +10,16 @@ RSpec.describe Company, type: :model do
   it 'is invalid without a name' do
     company = Company.new(name: nil)
 
-    expect(company).to_not be_valid
+    expect(company).not_to be_valid
   end
 
   it 'has an array of phone numbers' do
-    expect(company.phone_numbers).to eq([])
+    expect(google.phone_numbers).to eq([])
+  end
+
+  it 'responds to a phone number after its created' do
+    phone_number = google.phone_numbers.build(number: '555-4444')
+    expect(phone_number.number).to eq('555-4444')
   end
 
 end
