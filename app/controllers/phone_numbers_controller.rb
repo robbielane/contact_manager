@@ -54,10 +54,13 @@ class PhoneNumbersController < ApplicationController
   # DELETE /phone_numbers/1
   # DELETE /phone_numbers/1.json
   def destroy
-    contact = @phone_number.contact
     @phone_number.destroy
     respond_to do |format|
-      format.html { redirect_to person_path(contact), notice: 'Phone number was successfully destroyed.' }
+      if params[:contact_type] == 'Person'
+        format.html { redirect_to person_path(params[:contact_id]), notice: 'Phone number was successfully destroyed.' }
+      elsif params[:contact_type] == 'Company'
+        format.html { redirect_to company_path(params[:contact_id]), notice: 'Phone number was successfully destroyed.' }
+      end
       format.json { head :no_content }
     end
   end
