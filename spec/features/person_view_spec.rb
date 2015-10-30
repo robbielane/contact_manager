@@ -55,7 +55,9 @@ describe 'the person view', type: :feature do
     it 'deletes a phone number' do
       first(:link, 'delete').click
       expect(current_path).to eq(person_path(person))
+      expect(page).to_not have_content('608-358-6700')
       first(:link, 'delete').click
+      expect(page).to_not have_content('608-845-1511')
       expect(page).to_not have_link('delete')
     end
   end
@@ -83,6 +85,39 @@ describe 'the person view', type: :feature do
       click_button('Create Email address')
       expect(current_path).to eq(person_path(person))
       expect(page).to have_content('bob@example.com')
+    end
+
+    it 'has links to edit email addresses' do
+      person.email_addresses.each do |email|
+        expect(page).to have_link('edit', edit_email_address_path(email))
+      end
+    end
+
+    it 'edits a email address' do
+      email = person.email_addresses.first
+      old_email = email.address
+
+      first(:link, "edit").click
+      fill_in('Address', with: 'bobby@example.com')
+      page.click_button('Update Email address')
+      expect(current_path).to eq(person_path(person))
+      expect(page).to have_content('bobby@example.com')
+      expect(page).to_not have_content(old_email)
+    end
+
+    it 'has links to delete an email address' do
+      person.email_addresses.each do |email|
+        expect(page).to have_link('delete', href: email_address_path(email))
+      end
+    end
+
+    it 'deletes a email address' do
+      first(:link, 'delete').click
+      expect(current_path).to eq(person_path(person))
+      expect(page).to_not have_content('bob@gmail.com')
+      first(:link, 'delete').click
+      expect(page).to_not have_content('bob@bobmarley.com')
+      expect(page).to_not have_link('delete')
     end
   end
 end
