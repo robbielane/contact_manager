@@ -14,7 +14,22 @@
  *= require_self
  */
 
+.brand-logo {
+  font-weight: 900;
+  margin-left: 15px;
+}
 
+h1 {
+  font-size: 30px;
+  font-weight: 700;
+  color: #616161;
+}
+
+h2 {
+  font-size: 25px;
+  font-weight: 700;
+  color: #01579b;
+}
 
 li {
   font-size: 1.1em;
@@ -26,4 +41,9 @@ span {
 
 .border-right {
   border-right: 1px solid rgba(160,160,160,0.2);
+}
+
+nav ul li a   {
+  font-weight: 700;
+  color: #455a64;
 }
