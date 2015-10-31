@@ -22,4 +22,10 @@ RSpec.describe Company, type: :model do
     expect(phone_number.number).to eq('555-4444')
   end
 
+  it 'responds to a email address after its created' do
+    email_address = google.email_addresses.build(address: 'bob@gmail.com')
+    expect(email_address.address).to eq('bob@gmail.com')
+  end
+
+
 end
