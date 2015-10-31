@@ -13,3 +13,17 @@
  *= require_tree .
  *= require_self
  */
+
+
+
+li {
+  font-size: 1.1em;
+}
+
+span {
+  font-size: 23px;
+}
+
+.border-right {
+  border-right: 1px solid rgba(160,160,160,0.2);
+}
